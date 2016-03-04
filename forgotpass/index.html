@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!--Tab Name-->
+	<title>MFSR | Forgot Password</title>
+
+	<!-- Metadata about the webpage-->
+	<meta name="keywords" content=""/>
+	<meta name="description" content="Forgotten password page for MSFR"/>
+	<meta name="author" content="Scott Thomson"/>
+
+	<!-- Sitewide CSS -->
+	<link rel="stylesheet" type="text/css" href="../css/mfsr.css">
+
+	<!-- Jquery -->
+	<script src="../js/jquery-2.1.3.min.js"></script>
+</head>
+<body>
+	<div id="wrapper">
+		<div class="banner">
+			<a href="../"><h1>MFSR</h1></a>
+		</div>
+		<!--
+		Area that contains where the user will enter their details to reset their password
+		-->
+		<div class="contentBox">
+			<h2>Forgotten Password</h2>
+			<form method="POST" action="">
+			<center>
+			<table>
+				<tr>
+					<td>Username:</td>
+					<td><input id="username" type="text" name="username" placeholder="Username"></td>
+				</tr>
+				<tr>
+					<td>E-Mail:</td>
+					<td><input id="email" type="text" name="email" placeholder="name@email.com"></td>
+				</tr>
+			</table>
+
+			<table>
+				<tr>
+					<td><input name="submit" type="submit" value="Submit"></td>
+				</tr>
+			</table>
+			<!-- area that will display text to the user, if they have entered something wrong -->
+			<div id="feedback"></div>
+			</center>
+			</form>
+		</div>
+	</div>
+	<!-- This script handles the feedback to the user. It fades the feedback text -->
+	<script type="text/javascript" src="js/forgotPass.js"></script>
+</body>
+</html>

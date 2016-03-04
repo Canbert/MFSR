@@ -1,0 +1,24 @@
+#wrapper{
+	margin: 20px auto;
+	width: 98%;
+}
+#fileList{
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+.listFilesTable{
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	border-spacing: 0;
+}
+.listFilesTable td{
+	padding: 5px;
+}
+.listFilesTable thead{
+	background-color: #141414;
+	color: white;
+	height: 40px;
+	line-height: 40px;
+}
