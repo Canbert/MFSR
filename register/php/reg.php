@@ -53,7 +53,7 @@ else
 
 function newUser($username,$email,$password)
 {
-	$query = "insert into users(username,email,password) values ('$username','$email',md5('$password'))";
+	$query = "insert into users(username,password,email) values ('$username',md5('$password'),'$email')";
 	$data = mysql_query($query)or die(mysql_error());
 	if($data)
 	{

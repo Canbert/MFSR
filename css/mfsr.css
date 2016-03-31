@@ -68,8 +68,8 @@ NavBar Area
 }
 #navBigName{
 	font-size: 28px;
-	background-color: ;
-	width: 400px !important;
+	/*background-color: ;*/
+	/*width: 400px !important;*/
 }
 #navBigName:hover{
 	color: #EB7D2F;

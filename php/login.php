@@ -26,7 +26,7 @@ if(!empty($_POST['username']) AND !empty($_POST['password']))
 		// Register $myusername, $mypassword and redirect to messenger
 		session_start();
 		$_SESSION["myusername"] = $user;
-		$_SESSION["mypassword"] = $pass;
+//		header("location:messenger");
 		echo '<script>location.href="messenger";</script>'; //using header doesn't work for some reason
 	}
 	else{
