@@ -1,0 +1,10 @@
+<!-- This is the navbar page that is loaded in to the messenger and files page -->
+<div id="navBar">
+  <a id="navBigName" href="">MFSR</a>
+  <ul>
+    <li ><a id="navMess" href="/messenger">Messenger</a></li>
+    <li><a href="/user"><?php session_start(); echo $_SESSION['username']?></a> </li>
+    <!--<li><a id="navFile" href="/files">Files </a></li>-->
+    <li id="navLogout"><a href="../php/logout.php">Logout </a></li>
+  </ul>
+</div>
