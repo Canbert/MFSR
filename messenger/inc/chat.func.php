@@ -1,19 +1,16 @@
 <?php
 
-	function get_msg() {
-		
-		$query = "SELECT username,message,timestamp FROM messenger.messages,messenger.users WHERE messages.user_id = users.user_id ORDER BY message_id";
-		
-		$run = mysql_query($query);
+	$db =  new PDO('mysql:host=localhost;dbname=messenger',"root","");
 
-		$messages = array();
-		
-		while($message = mysql_fetch_assoc($run)) {
-			$messages[] = array('sender'=>$message['username'],
-								'message'=>$message['message'],
-								'timestamp'=>$message['timestamp']);
-		}
-		
+	function get_msg() {
+
+		global $db;
+
+		$data = $db->prepare('SELECT username,message,timestamp FROM messenger.messages,messenger.users WHERE messages.user_id = users.user_id ORDER BY message_id');
+		$data->execute();
+
+		$messages = $data->fetchAll();
+
 		return $messages;
 		
 	}
@@ -22,28 +19,14 @@
 		
 		if(!empty($sender) && !empty($message)) {
 
-			//Temp query
+			global $db;
 
-			$query = "SELECT user_id FROM messenger.users WHERE username = '$_SESSION[myusername]'";
-
-			$run = mysql_query($query);
-
-			$row = mysql_fetch_assoc($run);
-
-			$sender = $row['user_id'];
-
-//			$sender = mysql_real_escape_string($sender);
-			$message = mysql_real_escape_string($message);
-			$message = strip_tags($message);
-			
-			$query = "INSERT INTO messenger.messages VALUES (null,'$message', null,'$sender')";
-
-			if($run = mysql_query($query)) {
+			$data = $db->prepare('INSERT INTO messenger.messages VALUES (null,(:message),null,(:sender))');
+			$data->bindParam( ':message', htmlspecialchars($message), PDO::PARAM_STR );
+			$data->bindParam( ':sender', $sender, PDO::PARAM_STR );
+			if($data->execute()){
 				return true;
-			} else {
-				return false;
 			}
-			
 		} else {
 			return false;
 		}
@@ -51,11 +34,17 @@
 
 	function display_user_info()
 	{
-		$sql= mysql_query("SELECT username,email FROM users WHERE username ='$_SESSION[myusername]'");
-		if (mysql_num_rows($sql) > 0)
-		{
-			while($row = mysql_fetch_assoc($sql))
-			{
+		global $db;
+
+		$data = $db->prepare('SELECT username,email FROM users WHERE username=(:username)');
+		$data->bindParam(':username',$_SESSION['username'],PDO::PARAM_STR);
+		$data->execute();
+
+		if($data->rowCount() > 0){
+
+			$user_info[] = $data->fetch();
+
+			foreach($user_info as $row){
 				echo '<div id="userInfo">'.nl2br("Username: ".$row['username']."\n"."E-mail: ".$row['email'].'</div>');
 			}
 		}
@@ -63,17 +52,18 @@
 
 	function update_active_users()
 	{
-		$d=date('c',time()-2*60);//last 2 minutes
-		mysql_query("update users set online=0 where last_active<'$d'");
+		global $db;
 
-		$q=mysql_query("select username from users where online=1");
-		if(mysql_affected_rows()>0){
-			print "<ul>";
-			while($users=mysql_fetch_array($q)){
-				print "<li>{$users[0]}</li>";
-			}
-			print "</ul>";
+		$d=date('c',time()-2*60);//last 2 minutes
+
+		$data = $db->prepare('UPDATE users SET online=0 WHERE last_active<(:d)');
+		$data->bindParam(':d',$d,PDO::PARAM_STR);
+		$data->execute();
+
+		$data = $db->prepare('SELECT username FROM users WHERE online=1');
+		$data->execute();
+
+		if($data->rowCount()>0){
+			echo '<ul><li>' . $data->fetchColumn() . '</li></ul>';
 		}
 	}
-
-?>

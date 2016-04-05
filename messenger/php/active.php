@@ -1,13 +1,17 @@
 <?php
-require('../../inc/connect.php');
-require('../inc/chat.func.php');
+	require('../../inc/connect.php');
+	require('../inc/chat.func.php');
 
-session_start();
+	session_start();
 
-if(isset($_SESSION['myusername'])){
-	$user=$_SESSION['myusername'];
-	$date=date('c');
-	mysql_query("update users set last_active='$date',online=1 where username='$user'");
-	update_active_users();
-}
-?>
+	if(isset($_SESSION['username'])){
+		$user=$_SESSION['username'];
+		$date=date('c');
+
+		$data = $db->prepare('UPDATE users SET last_active=(:date),online=1 WHERE username=(:user)');
+		$data->bindParam(':date',$date,PDO::PARAM_STR);
+		$data->bindParam(':user',$user,PDO::PARAM_STR);
+		$data->execute();
+
+		update_active_users();
+	}

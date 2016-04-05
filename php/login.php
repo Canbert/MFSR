@@ -9,24 +9,22 @@ if(!empty($_POST['username']) AND !empty($_POST['password']))
 	$pass=$_POST['password'];
 
 	// To protect MySQL injection
-	$user = stripslashes($user);
-	$pass = md5($pass);
-	$user = mysql_real_escape_string($user);
-	$pass = mysql_real_escape_string($pass);
+//	$user = stripslashes($user);
+//	$pass = md5($pass);
+//	$user = mysql_real_escape_string($user);
+//	$pass = mysql_real_escape_string($pass);
 
-	$sql="SELECT * FROM users WHERE username='$user' and password='$pass'";
-
-	$result=mysql_query($sql);
-
-	// Mysql_num_row is counting table row
-	$count=mysql_num_rows($result);
+	$data = $db->prepare('SELECT username FROM users WHERE username =(:user) and password=(:pass) LIMIT 1');
+	$data->bindParam( ':user', $user, PDO::PARAM_STR );
+	$data->bindParam( ':pass', hash("sha512",$pass . $salt), PDO::PARAM_STR );
+	$data->execute();
 
 	// If result matched $user and $pass, table row must be 1 row
-	if($count==1){
-		// Register $myusername, $mypassword and redirect to messenger
+	if($data->rowCount()==1){
+		// Register $username, and redirect to messenger
 		session_start();
-		$_SESSION["myusername"] = $user;
-//		header("location:messenger");
+		$_SESSION["username"] = $user;
+//		header("location:../messenger");
 		echo '<script>location.href="messenger";</script>'; //using header doesn't work for some reason
 	}
 	else{

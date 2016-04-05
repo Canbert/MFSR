@@ -3,7 +3,7 @@ require 'inc/core.inc.php';
 
 session_start();
 
-if(!isset($_SESSION['myusername'])){
+if(!isset($_SESSION['username'])){
 	header("location: ../");
 }
 ?>

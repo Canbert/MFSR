@@ -4,9 +4,17 @@ require('../../inc/connect.php');
 
 if(!empty($_POST['username']) AND !empty($_POST['email'])) //check if the username and email textbox is empty
 {
-	$query = mysql_query("select username from users where username = '$_POST[username]'")or die(mysql_error());
-	if (mysql_num_rows($query) != 0)
-	{
+
+	$user = $_POST['username'];
+//	$user = stripslashes( $user );
+//	$user = mysqli_real_escape_string( $user );
+
+	$data = $db->prepare('SELECT username FROM users WHERE username = (:user) LIMIT 1');
+	$data->bindParam( ':user', $user, PDO::PARAM_STR );
+	$data->execute();
+	$row = $data->fetch();
+
+	if($data-> rowCount() == 1){
 		echo "User already registered";
 	}
 	else
@@ -15,19 +23,22 @@ if(!empty($_POST['username']) AND !empty($_POST['email'])) //check if the userna
 		{
 			if($_POST['password'] == $_POST['repassword'])
 			{	
-				if(strlen($_POST['password'])>=8)
+				if(strlen($_POST['password'])>=4)
 				{
 					$user = $_POST['username'];
 					$email = $_POST['email'];
 					$pass = $_POST['password'];
-					
-					if(newUser($user,$email,$pass))
-					{
+
+					$data = $db->prepare('INSERT INTO users(username,password,email) VALUES (:username,:password,:email)');
+					$data->bindParam( ':username', $user, PDO::PARAM_STR );
+					$data->bindParam( ':password', hash("sha512",$pass . $salt), PDO::PARAM_STR );
+					$data->bindParam( ':email', $email, PDO::PARAM_STR );
+
+					if($data->execute()){
 						echo "User Created";
 					}
-					else
-					{
-						echo "User not created";
+					else{
+						echo "User Not Created";
 					}
 				}
 				else
@@ -49,19 +60,5 @@ if(!empty($_POST['username']) AND !empty($_POST['email'])) //check if the userna
 else
 {
 	echo "One or More fields is empty";
-}
-
-function newUser($username,$email,$password)
-{
-	$query = "insert into users(username,password,email) values ('$username',md5('$password'),'$email')";
-	$data = mysql_query($query)or die(mysql_error());
-	if($data)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
 }
 ?>

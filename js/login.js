@@ -13,9 +13,9 @@ $('form').submit(function() {
 			
 			if (data){
 				$('#feedback').html(data);
-					$('#feedback').fadeIn('fast', function() {
-						$('#feedback').fadeOut(6000);
-					});	
+					//$('#feedback').fadeIn('fast', function() {
+					//	$('#feedback').fadeOut(6000);
+					//});
 			}	
 		}
 	});

@@ -1,13 +1,16 @@
 <?php
-	require('../../inc/connect.php');
 	require('../inc/chat.func.php');
 	session_start();
-	if(isset($_SESSION['myusername'])) {
+	if(isset($_SESSION['username'])) {
 
-		$sql= mysql_query("SELECT username FROM users WHERE username ='$_SESSION[myusername]'");
-		$row = mysql_fetch_assoc($sql);
-		$sender = $row['username'];
-		
+		$user = $_SESSION['username'];
+
+		$data = $db->prepare('SELECT user_id FROM messenger.users WHERE username = (:user) LIMIT 1');
+		$data->bindParam( ':user', $user, PDO::PARAM_STR );
+		$data->execute();
+
+		$sender = $data->fetchColumn();
+
 		if(isset($_GET['message'])&&!empty($_GET['message'])) {
 			$message = $_GET['message'];
 			
@@ -24,5 +27,3 @@
 	} else {
 		echo 'Not logged in';
 	}
-	
-?>
