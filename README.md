@@ -5,7 +5,7 @@ A instant messenger and file sharing system. Originally designed for HND Computi
 
 - [x] Implement Foundation Framework
 - [ ] Asynchronous requests
-- [Partialy Done] Emojis 
+- [ ] PARTIALLY DONE Emojis 
 - [ ] Hyperlinks
 - [ ] Images(links/post them)
 - [ ] Account verification via email
