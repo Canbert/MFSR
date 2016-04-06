@@ -3,7 +3,6 @@ body{
     padding: 0;
     margin: 0;
     font-family: verdana;
-    color: white;
 }
 /*
 CSS that is used throughout the whole site
@@ -24,42 +23,31 @@ a:hover{
 }
 /*
 Banner Area
-header link at top of page
+header link at top of login, registration, forgot password, and change password pages
 */
 .banner{
-    padding: 0;
-    margin: 0;
-    height:50px;
-    line-height: 50px;
+    color: white;
+    margin-bottom: 1em;
     background-color: black;
     text-align: center;
 }
-.banner h1{
-    padding: 0;
-    margin: 0;
-    border: none;
-}
 /*
 Content Area
-area for forms,textboxes, buttons etc.
+form styling used for login, registration, forgot password, and change password pages
 */
 .content-box{
     background-color: #EEEEEE;
-    /*height: auto;*/
-    /*padding-bottom: 5px;*/
 }
-.content-box h2{
+.content-box-header{
     background-color: #141414;
     color: white;
-    padding-left: 20px;
-    height: 40px;
-    line-height: 40px;
+}
+.content-box-content{
+    padding-right: 2em;
+    padding-left: 2em;
 }
 .content-box a{
     color: black;
-}
-.content-box td{
-    padding: 5px;
 }
 /*
 Focus area
@@ -70,35 +58,13 @@ Focus area
 /*
 Buttons area
 */
-input[type=submit] {
-    -webkit-border-radius: 5;
-    -moz-border-radius: 5;
-    border-radius: 5px;
-    border: none;
-    font-family: verdana;
-    color: #ffffff;
-    font-size: 16px;
+.button{
+    color:white !important;
     background: #444444;
-    padding: 5px 8px 5px 8px;
-    text-decoration: none;
 }
-input[type=submit]:hover {
-    text-decoration: none;
+.button:hover,.button:focus{
     background: #141414;
     color: #EB7D2F;
-}
-/*
-Textboxes area
-*/
-input[type=text],input[type=password] {
-
-}
-/*
-File Upload Area
-*/
-#fileUpload{
-    padding: 10px;
-    border-top: 1px solid #A9A9A9;
 }
 
 /*

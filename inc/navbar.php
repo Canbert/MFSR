@@ -14,6 +14,7 @@
       <li class="has-submenu">
         <a href="/user">User</a>
         <ul class="submenu menu vertical" data-submenu>
+          <li><a href="/password/change">Change Password</a></li>
           <li><a href="/user">Settings</a></li>
           <li><a href="../php/logout.php">Logout</a></li>
         </ul>

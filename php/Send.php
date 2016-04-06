@@ -11,7 +11,7 @@
 
 		$sender = $data->fetchColumn();
 
-		if(isset($_GET['message'])&&!empty($_GET['message'])) {
+		if(!empty($_GET['message'])) { //isset($_GET['message'])&&
 			$message = $_GET['message'];
 			
 			if(send_msg($sender, $message)) {

@@ -2,35 +2,32 @@
 session_start();
 
 //if the users session is already logged in it will automatically send them to the messenger page
-if(isset($_SESSION['username']))
+if(!isset($_SESSION['username']))
 {
-	header("location:../");
+	header("location:../../");
 }
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-
 	<!-- Metadata about the webpage-->
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<meta name="keywords" content=""/>
-	<meta name="description" content="Login page for MSFR"/>
+	<meta name="description" content="Change Password page for MSFR"/>
 	<meta name="author" content="Scott Thomson"/>
 
 	<!--Tab Name-->
-	<title>MFSR | Login</title>
+	<title>MFSR | Change Password</title>
 
-	<link rel="stylesheet" href="../css/foundation.css">
+	<link rel="stylesheet" href="../../css/foundation.css">
 
 	<!-- Sitewide CSS -->
-	<link rel="stylesheet" href="../css/app.css">
-
+	<link rel="stylesheet" href="../../css/app.css">
 </head>
 <body>
-
 	<div class="row">
 		<div class="medium-6 medium-centered large-5 large-centered columns">
 
@@ -38,21 +35,20 @@ if(isset($_SESSION['username']))
 
 			<form method="POST">
 				<div class="row column content-box">
-					<h4 class="text-center content-box-header">Login</h4>
+					<h4 class="text-center content-box-header">Change Password</h4>
 					<div class="content-box-content">
-						<label>Username
-							<input id="username" type="text" name="username" placeholder="Username" required>
+						<label>Old Password
+							<input id="oldPass" type="password" name="oldPass" placeholder="Old Password" required>
 						</label>
-						<label>Password
-							<input id="password" type="password" name="password" placeholder="Password" required>
+						<label>New Password
+							<input id="newPass" type="password" name="newPass" placeholder="New Password" autocomplete="off" required>
+						</label>
+						<label>Confirm New Password
+							<input id="reNewPass" type="password" name="reNewPass" placeholder="Confirm New Password" autocomplete="off" required>
 						</label>
 						<div id="feedback"></div>
-						<p class="text-center"><a href="/password/reset">Forgot your password?</a></p>
-						<!--					<p><a type="submit" class="button expanded">Login</a></p>-->
-						<input class="button expanded" name="submit" type="submit" value="Login">
-						<p class="text-center"><a href="../register">Need an Account? Register Here</a></p>
+						<input class="button expanded" name="submit" type="submit" value="Submit">
 					</div>
-
 				</div>
 			</form>
 		</div>
@@ -62,7 +58,8 @@ if(isset($_SESSION['username']))
 	<script src="../js/what-input.js"></script>
 	<script src="../js/foundation.min.js"></script>
 	<script src="../js/app.js"></script>
+
 	<!-- This script handles the feedback to the user. It fades the feedback text -->
-	<script type="text/javascript" src="js/login.js"></script>
+	<script type="text/javascript" src="js/changePass.js"></script>
 </body>
 </html>

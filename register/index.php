@@ -1,59 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<!--Tab Name-->
-	<title>MFSR | Register</title>
-
 	<!-- Metadata about the webpage-->
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 	<meta name="keywords" content=""/>
 	<meta name="description" content="Register page for MSFR"/>
 	<meta name="author" content="Scott Thomson"/>
 
-	<!-- Sitewide CSS -->
-	<link rel="stylesheet" type="text/css" href="../css/mfsr.css">
+	<!--Tab Name-->
+	<title>MFSR | Register</title>
 
-	<!-- Jquery -->
-	<script src="../js/jquery-2.1.3.min.js"></script>
+	<link rel="stylesheet" href="../../css/foundation.css">
+
+	<!-- Sitewide CSS -->
+	<link rel="stylesheet" href="../../css/app.css">
 </head>
 <body>
-	<div id="wrapper">
-		<div class="banner">
-			<a href="../"><h1>MFSR</h1></a>
-		</div>
-		<!--
-		
-		-->
-		<div class="contentBox">
-			<h2>Register</h2>
-			<form id="formReg" method="POST" action="">
-			<center>
-			<table>
-				<tr>
-					<td>Username:</td>
-					<td><input id="username" type="text" name="username" placeholder="Username" value="<?php if (isset($_POST['usernamename'])) echo $_POST['username']; ?>"></td>
-				</tr>
-				<tr>
-					<td>E-Mail:</td>
-					<td><input id="email" type="text" name="email" placeholder="name@email.com"></td>
-				</tr>
-				<tr>
-					<td>Password:</td>
-					<td><input id="password" type="password" name="password" placeholder="Password"></td>
-				</tr>
-				<tr>
-					<td>Confirm Password:</td>
-					<td><input id="repassword" type="password" name="repassword" placeholder="Confirm Password"></td>
-				</tr>
-				<tr>
-					<td colspan="2" align="center"><input name="submit" type="submit" value="Register"></td>
-				</tr>
-			</table>
-			<div id="feedback"></div>
-			</center>
+	<div class="row">
+		<div class="medium-6 medium-centered large-5 large-centered columns">
+
+			<div class="banner"><h2><a href="../../">MFSR</a></h2></div>
+
+			<form method="POST">
+				<div class="row column content-box">
+					<h4 class="text-center content-box-header">Register</h4>
+					<div class="content-box-content">
+						<label>Username
+							<input id="username" type="text" name="username" placeholder="Username" required>
+						</label>
+						<label>Email
+							<input id="email" type="email" name="email" placeholder="name@email.com" required>
+						</label>
+						<label>Password
+							<input id="password" type="password" name="password" placeholder="Password">
+						</label>
+						<label>Confirm Password
+							<input id="repassword" type="password" name="repassword" placeholder="Confirm Password">
+						</label>
+						<div id="feedback"></div>
+						<input class="button expanded" name="submit" type="submit" value="Submit">
+					</div>
+				</div>
 			</form>
 		</div>
 	</div>
 
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/what-input.js"></script>
+	<script src="../js/foundation.min.js"></script>
+	<script src="../js/app.js"></script>
 	<script type="text/javascript" src="js/reg.js"></script>
 </body>
 </html>
