@@ -1,7 +1,8 @@
-$('#formMess').submit(function() {
-	var mess = $('#userMess').val();
+$('#form-mess').submit(function() {
+	var mess = $('#user-mess').val();
+	$('#feedback').html("");
 	$.ajax({
-		url: 'php/Send.php',
+		url: 'php/send.php',
 		data: { message: mess }, 
 		success: function(data) {
 			$('#feedback').html(data);
@@ -10,7 +11,7 @@ $('#formMess').submit(function() {
 					//$('#feedback').fadeOut(6000);
 				});
 			
-			$('#userMess').val('');
+			$('#user-mess').val('');
 			
 		}
 	});

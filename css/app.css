@@ -1,0 +1,151 @@
+body{
+    background-color: #222222;
+    padding: 0;
+    margin: 0;
+    font-family: verdana;
+    color: white;
+}
+/*
+CSS that is used throughout the whole site
+this allows for easy use of elements that are similar or exactly the same looking
+*/
+body{
+    background-color: #222222;
+    padding: 0;
+    margin: 0;
+    font-family: verdana;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+a:hover{
+    color: #EB7D2F!important;
+}
+/*
+Banner Area
+header link at top of page
+*/
+.banner{
+    padding: 0;
+    margin: 0;
+    height:50px;
+    line-height: 50px;
+    background-color: black;
+    text-align: center;
+}
+.banner h1{
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+/*
+Content Area
+area for forms,textboxes, buttons etc.
+*/
+.content-box{
+    background-color: #EEEEEE;
+    /*height: auto;*/
+    /*padding-bottom: 5px;*/
+}
+.content-box h2{
+    background-color: #141414;
+    color: white;
+    padding-left: 20px;
+    height: 40px;
+    line-height: 40px;
+}
+.content-box a{
+    color: black;
+}
+.content-box td{
+    padding: 5px;
+}
+/*
+Focus area
+*/
+:focus{
+    outline-color: #EB7D2F;
+}
+/*
+Buttons area
+*/
+input[type=submit] {
+    -webkit-border-radius: 5;
+    -moz-border-radius: 5;
+    border-radius: 5px;
+    border: none;
+    font-family: verdana;
+    color: #ffffff;
+    font-size: 16px;
+    background: #444444;
+    padding: 5px 8px 5px 8px;
+    text-decoration: none;
+}
+input[type=submit]:hover {
+    text-decoration: none;
+    background: #141414;
+    color: #EB7D2F;
+}
+/*
+Textboxes area
+*/
+input[type=text],input[type=password] {
+
+}
+/*
+File Upload Area
+*/
+#fileUpload{
+    padding: 10px;
+    border-top: 1px solid #A9A9A9;
+}
+
+/*
+    Foundation Overrides
+*/
+.title-bar {
+    background: #333;
+    padding: 0.9rem; }
+
+.top-bar {
+    background: black; }
+.top-bar ul {
+    background: black; }
+.top-bar ul li {
+    background: black; }
+.top-bar ul li a {
+    color: #fff; }
+
+.title-bar{
+    background: black;
+}
+
+.menu-text {
+    color: #fff; }
+@media only screen and (max-width: 40em) {
+    .menu-text {
+        display: none !important; } }
+
+@media only screen and (min-width: 40em) {
+    .top-bar .menu:last-child {
+        border-left: 1px solid #4e4e4e; }
+
+    .top-bar .menu:first-child {
+        border-left: none; }
+
+    .top-bar .menu li:not(:last-child) {
+        border-right: 1px solid #4e4e4e; } }
+.dropdown.menu .submenu {
+    border: none; }
+
+.dropdown.menu .is-dropdown-submenu-parent.is-right-arrow > a::after {
+    border-color: #fff transparent transparent; }
+
+.is-drilldown-submenu-parent > a::after {
+    border-color: transparent transparent transparent #fff; }
+
+.js-drilldown-back::before {
+    border-color: transparent #fff transparent transparent; }
+
+

@@ -8,78 +8,68 @@ if(!isset($_SESSION['username'])){
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html class="no-js" lang="en" dir="ltr" xmlns="http://www.w3.org/1999/html">
 <head>
-	<!--Tab Name-->
-	<title>MFSR | Messenger</title>
-
 	<!-- Metadata about the webpage-->
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 	<meta name="keywords" content=""/>
 	<meta name="description" content="Messenger page for MSFR"/>
 	<meta name="author" content="Scott Thomson"/>
 
+	<!--Tab Name-->
+	<title>MFSR | Messenger</title>
+
+	<link rel="stylesheet" href="css/foundation.css">
+
 	<!-- Sitewide CSS -->
-	<link rel="stylesheet" type="text/css" href="css/mfsr.css">
+	<link rel="stylesheet" href="css/app.css">
 
 	<!-- Page CSS -->
 	<link rel="stylesheet" type="text/css" href="css/messenger.css">
 
-	<!-- Jquery -->
-	<script src="js/jquery-2.1.3.min.js"></script>
-
-	<!-- Javascript file that loads in the navigation bar-->
-	<script type="text/javascript" src="js/navBar.js"></script>
-
 </head>
 <body>
-	
-	<div class="banner"></div>
 
-	<div id="wrapper">
-		
-		<div id="sideBarWrapper">
-			<div id="sideBar">
-				<div id="innerSideBarWrapper">
-				<h4>User Details:</h4>
-				<?php
-					display_user_info();
-				?>
-				<br/>
-				<a href="changepass">Change Password</a>
+	<nav>
+		<?php include_once("inc/navbar.php")?>
+	</nav>
 
-				<h4>Users Online:</h4>
+	<div class="row" id="content">
 
-				<div id="activeUsers"></div>
+		<div class="medium-8 columns">
+			<div class="row content-box" id="messages-box"></div>
 
-				</div>
-			</div>
+			<form class="row content-box" id="form-mess" method="POST" action="">
+				<input id="user-mess" name="user-mess" type="text" maxlength="300" autocomplete="off">
+				<input id="form-mess-button" name="submit" type="submit" value="Send">
+				<input id="auto-scroll-check" type="checkbox" checked="checked" >
 
-			<button id="toggleSideBar"></button>
-
-		</div>
-
-		<div id="messengerWrapper">
-			
-			<div class="contentBox" id="messagesBox"></div>
-
-			<form class="contentBox" id="formMess" method="POST" action="">
-				<label for="autoScrollCheck">Autoscroll messages</label>
-				<input id="autoScrollCheck" type="checkbox" checked="checked" >
-				<input id="userMess" name="userMess" type="text" maxlength="300" autocomplete="off">
-				<input id="sendButt" name="submit" type="submit" value="Send">
+				<label for="auto-scroll-check">Autoscroll messages</label>
 				<div id="feedback"></div>
-			</form>
 
-			<?php
-				echo displayUploadForm();
-			?>
+
+<!--				--><?php
+//					echo displayUploadForm();
+//				?>
+			</form>
 		</div>
-		
+		<div class="medium-3 columns" data-sticky-container>
+			<div class="sticky" data-sticky data-anchor="content">
+				<h4>Users Online:</h4>
+				<div id="active-users"></div>
+			</div>
+		</div>
 	</div>
 
-	<script type="text/javascript" src="js/sideBarToggle.js"></script>
-	<script type="text/javascript" src="js/auto_chat.js"></script>
-	<script type="text/javascript" src="js/send.js"></script>
-	<script type="text/javascript" src="js/auto_active_users.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/what-input.js"></script>
+	<script src="js/foundation.min.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/auto_chat.js"></script>
+	<script src="js/send.js"></script>
+	<script src="js/auto_active_users.js"></script>
 </body>
 </html>

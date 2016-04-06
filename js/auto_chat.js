@@ -1,13 +1,13 @@
 $(document).ready(function() {
 	var interval = setInterval(function() {
 		$.ajax({
-			url: 'php/Chat.php',
+			url: 'php/chat.php',
 			success: function(data) {
-				$('#messagesBox').html(data);
+				$('#messages-box').html(data);
 
-				if ($('#autoScrollCheck').is(':checked')) 
+				if ($('#auto-scroll-check').is(':checked'))
 				{
-					var objDiv = document.getElementById("messagesBox");
+					var objDiv = document.getElementById("messages-box");
 					objDiv.scrollTop = objDiv.scrollHeight;
 				}
 			}

@@ -3,7 +3,7 @@ $(document).ready(function() {
 		$.ajax({
 			url: 'php/active.php',
 			success: function(data) {
-				$('#activeUsers').html(data);
+				$('#active-users').html(data);
 			}
 		});
 	}, 1000);
