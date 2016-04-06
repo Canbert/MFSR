@@ -27,6 +27,8 @@ if(!isset($_SESSION['username'])){
 	<!-- Sitewide CSS -->
 	<link rel="stylesheet" href="css/app.css">
 
+	<link rel="stylesheet" href="css/emoji.css">
+
 </head>
 <body>
 
