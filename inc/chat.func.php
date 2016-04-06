@@ -64,6 +64,8 @@
 		$data->execute();
 
 		if($data->rowCount()>0){
-			echo '<ul><li><a>' . $data->fetchColumn() . '</a></li></ul>';
+			foreach($data->fetchAll() as $user){
+				echo '<ul><li><a>' . $user['username'] . '</a></li></ul>';
+			}
 		}
 	}
