@@ -1,5 +1,5 @@
 <?php
 	$feedback = array();
 	require('../inc/connect.php');
-	require('displayUpForm.php');
+	require('display-upload-form.php');
 ?>

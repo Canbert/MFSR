@@ -22,7 +22,7 @@
 			global $db;
 
 			$data = $db->prepare('INSERT INTO messenger.messages VALUES (null,(:message),null,(:sender))');
-			$data->bindParam( ':message', htmlspecialchars($message), PDO::PARAM_STR );
+			$data->bindParam( ':message', nl2br(htmlspecialchars($message)), PDO::PARAM_STR );
 			$data->bindParam( ':sender', $sender, PDO::PARAM_STR );
 			if($data->execute()){
 				return true;
@@ -64,6 +64,6 @@
 		$data->execute();
 
 		if($data->rowCount()>0){
-			echo '<ul><li>' . $data->fetchColumn() . '</li></ul>';
+			echo '<ul><li><a>' . $data->fetchColumn() . '</a></li></ul>';
 		}
 	}

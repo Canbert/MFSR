@@ -27,9 +27,6 @@ if(!isset($_SESSION['username'])){
 	<!-- Sitewide CSS -->
 	<link rel="stylesheet" href="css/app.css">
 
-	<!-- Page CSS -->
-	<link rel="stylesheet" type="text/css" href="css/messenger.css">
-
 </head>
 <body>
 
@@ -37,30 +34,28 @@ if(!isset($_SESSION['username'])){
 		<?php include_once("inc/navbar.php")?>
 	</nav>
 
-	<div class="row" id="content">
-
+	<div class="row">
 		<div class="medium-8 columns">
+
 			<div class="row content-box" id="messages-box"></div>
 
 			<form class="row content-box" id="form-mess" method="POST" action="">
-				<input id="user-mess" name="user-mess" type="text" maxlength="300" autocomplete="off">
-				<input id="form-mess-button" name="submit" type="submit" value="Send">
-				<input id="auto-scroll-check" type="checkbox" checked="checked" >
-
-				<label for="auto-scroll-check">Autoscroll messages</label>
+				<textarea id="user-mess"></textarea>
+<!--				<input id="user-mess" name="user-mess" type="textarea" maxlength="300" autocomplete="off">-->
+				<input id="form-mess-button" class="button" name="submit" type="submit" value="Send">
+				<label for="auto-scroll-check">
+					<input id="auto-scroll-check" type="checkbox" checked="checked" >Autoscroll messages
+				</label>
 				<div id="feedback"></div>
-
 
 <!--				--><?php
 //					echo displayUploadForm();
 //				?>
 			</form>
 		</div>
-		<div class="medium-3 columns" data-sticky-container>
-			<div class="sticky" data-sticky data-anchor="content">
-				<h4>Users Online:</h4>
-				<div id="active-users"></div>
-			</div>
+		<div id="users-online" class="medium-4 columns">
+			<h4 class="text-center">Users Online</h4>
+			<div id="active-users"></div>
 		</div>
 	</div>
 
@@ -68,8 +63,6 @@ if(!isset($_SESSION['username'])){
 	<script src="js/what-input.js"></script>
 	<script src="js/foundation.min.js"></script>
 	<script src="js/app.js"></script>
-	<script src="js/auto_chat.js"></script>
-	<script src="js/send.js"></script>
-	<script src="js/auto_active_users.js"></script>
+	<script src="js/messenger.js"></script>
 </body>
 </html>

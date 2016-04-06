@@ -3,13 +3,13 @@
 require 'inc/core.inc.php';
 require 'php/upload.php';
 
-//TODO REDIRECT UNTIL I MAKE THIS PAGE BETTER
+//REDIRECT UNTIL I MAKE THIS PAGE BETTER
 header("location:../");
 
 session_start();
 
 //redirect the user to the main page if the user is not logged in
-if(!isset($_SESSION['myusername'])){
+if(!isset($_SESSION['username'])){
 	header("location:../");
 }
 ?>
