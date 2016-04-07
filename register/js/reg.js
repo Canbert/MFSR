@@ -19,7 +19,8 @@ $('form').submit(function() {
 					//	$('#feedback').fadeOut(6000);
 					//});
 				if(data == "User Created"){
-					window.location.replace("../");
+					$('#feedback').siblings().hide();
+					$('#feedback').html(data + ", To activate your account use the link sent to your email address");
 				}
 			}	
 		}

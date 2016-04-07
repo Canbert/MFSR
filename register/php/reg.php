@@ -32,13 +32,40 @@ if(!empty($_POST['username']) AND !empty($_POST['email'])) //check if the userna
 					$user = stripslashes($user);
 					$user = htmlspecialchars($user);
 
-					$data = $db->prepare('INSERT INTO users(username,password,email) VALUES (:username,:password,:email)');
+					$hash = md5(rand(0,1000));
+
+					$data = $db->prepare('INSERT INTO users(username,password,email,hash) VALUES (:username,:password,:email,:hash)');
 					$data->bindParam( ':username', $user, PDO::PARAM_STR );
 					$data->bindParam( ':password', hash("sha512",$pass . $salt), PDO::PARAM_STR );
 					$data->bindParam( ':email', $email, PDO::PARAM_STR );
+					$data->bindParam( ':hash', $hash, PDO::PARAM_STR );
 
 					if($data->execute()){
 						echo "User Created";
+
+						$to      = $email; // Send email to our user
+						$subject = 'Signup | Verification'; // Give the email a subject
+						$message = '
+						Thanks for signing up!
+						Your account has been created, you can login with the following credentials after you have activated your account by pressing the url below.
+
+						------------------------
+						Username: '.$user.'
+						------------------------
+
+						Please click this link to activate your account:
+						http://mfsr.dev/verify.php?email='.$email.'&hash='.$hash.'
+
+						'; // Our message above including the link
+
+						$headers = 'From:noreply@mfsr.dev' . "\r\n"; // Set from headers
+						if(mail($to, $subject, $message, $headers)){ // Send our email
+							echo "Mail Sent";
+						}
+						else{
+							echo "Mail Not Sent";
+						}
+
 					}
 					else{
 						echo "User Not Created";
