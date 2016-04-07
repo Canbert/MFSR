@@ -11,17 +11,17 @@
 
 		$sender = $data->fetchColumn();
 
-		if(!empty($_GET['message'])) { //isset($_GET['message'])&&
+		if(!empty($_GET['message'])) {
 			$message = $_GET['message'];
 			
 			if(send_msg($sender, $message)) {
-				echo 'Message Sent';
+//				echo 'Message Sent';
 			} else {
 				echo 'Message wasn\'t sent';
 			}
 			
 		} else {
-			echo 'No Message was entered';
+//			echo 'No Message was entered';
 		}
 		
 	} else {

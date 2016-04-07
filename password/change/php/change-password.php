@@ -47,7 +47,7 @@ if (!empty($_POST['oldPass']))
 				}
 				else
 				{
-					echo "Passwords mininmum length is 8 characters, Please re-enter";
+					echo "Passwords mininmum length is ". $minpasslen ." characters, Please re-enter";
 				}
 			}
 			else

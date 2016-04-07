@@ -1,4 +1,5 @@
 <?php
+
 require('../inc/connect.php');
 
 session_start();
@@ -54,9 +55,8 @@ if(!isset($_SESSION['username'])){
                     header('location:../user/?username='.$username);
                 }
 
-                echo '<h4 class="text-center content-box-header">'.$username.'</h4>
-                <div class="content-box-content text-center">
-                </div>'
+                echo '<h4 class="text-center content-box-header">'.$username.'</h4>';
+                echo '<div class="content-box-content text-center"></div>'
             ?>
         </div>
     </div>

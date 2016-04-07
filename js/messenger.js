@@ -74,7 +74,7 @@ $(document).ready(function() {
 $('#user-mess').on('keydown', function(event){
     if (event.which == 13) {
         var content = this.value;
-        if(event.ctrlKey){
+        if(event.ctrlKey || event.shiftKey || event.altKey){
             this.value +="\n";
             event.stopPropagation();
         } else {

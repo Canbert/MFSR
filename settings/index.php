@@ -1,5 +1,6 @@
 <?php
-require('../inc/connect.php');
+
+require('php/display-info.php');
 
 session_start();
 
@@ -39,7 +40,8 @@ if(!isset($_SESSION['username'])){
         <div class="row column content-box">
             <h4 class="text-center content-box-header">Settings</h4>
             <div class="content-box-content text-center">
-                <a href="../password/change">Change Password</a>
+                <?php display_user_info(); ?>
+                <p><a href="../password/change">Change Password</a></p>
             </div>
         </div>
     </div>

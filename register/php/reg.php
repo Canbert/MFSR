@@ -108,7 +108,7 @@ if(!empty($_POST['username']) AND !empty($_POST['email'])) //check if the userna
 				}
 				else
 				{
-					echo "Passwords mininmum length is 8 characters, Please re-enter";
+					echo "Passwords mininmum length is " . $minpasslen . " characters, Please re-enter";
 				}
 			}
 			else

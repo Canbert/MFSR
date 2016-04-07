@@ -1,6 +1,6 @@
 <?php
 
-	require('/connect.php');
+	require('connect.php');
 
 	function get_msg() {
 
@@ -29,24 +29,6 @@
 			}
 		} else {
 			return false;
-		}
-	}
-
-	function display_user_info()
-	{
-		global $db;
-
-		$data = $db->prepare('SELECT username,email FROM users WHERE username=(:username)');
-		$data->bindParam(':username',$_SESSION['username'],PDO::PARAM_STR);
-		$data->execute();
-
-		if($data->rowCount() > 0){
-
-			$user_info[] = $data->fetch();
-
-			foreach($user_info as $row){
-				echo '<div id="userInfo">'.nl2br("Username: ".$row['username']."\n"."E-mail: ".$row['email'].'</div>');
-			}
 		}
 	}
 
