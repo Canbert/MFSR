@@ -12,10 +12,9 @@
   <div class="top-bar-right">
     <ul class="menu" data-responsive-menu="drilldown medium-dropdown">
       <li class="has-submenu">
-        <a href="/user">User</a>
+        <a href="/user"><?php echo $_SESSION['username'] ?></a>
         <ul class="submenu menu vertical" data-submenu>
-          <li><a href="/password/change">Change Password</a></li>
-          <li><a href="/user">Settings</a></li>
+          <li><a href="/settings">Settings</a></li>
           <li><a href="../php/logout.php">Logout</a></li>
         </ul>
       </li>

@@ -8,8 +8,12 @@ session_start();
 //then redirect to the main page
 if(session_destroy())
 {
-	$user = $_SESSION['myusername'];
-	mysql_query("update users set online=0 where username='$user'");
-	header("Location: ../");
+	$user = $_SESSION['username'];
+
+	$data = $db->prepare('UPDATE users SET online=0 WHERE username=(:user)');
+	$data->bindParam(':user',$user,PDO::PARAM_STR);
+	$data->execute();
+
+	header("Location:../login");
 }
 ?>

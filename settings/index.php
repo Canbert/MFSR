@@ -6,7 +6,6 @@ session_start();
 if(!isset($_SESSION['username'])){
     header("location: ../login");
 }
-
 ?>
 <!DOCTYPE html>
 <html class="no-js" lang="en" dir="ltr" xmlns="http://www.w3.org/1999/html">
@@ -21,7 +20,7 @@ if(!isset($_SESSION['username'])){
     <meta name="author" content="Scott Thomson"/>
 
     <!--Tab Name-->
-    <title>MFSR | User</title>
+    <title>MFSR | Settings</title>
 
     <link rel="stylesheet" href="../css/foundation.css">
 
@@ -38,26 +37,10 @@ if(!isset($_SESSION['username'])){
 <div class="row">
     <div class="medium-6 medium-centered large-5 large-centered columns">
         <div class="row column content-box">
-            <?php
-                if(isset($_GET['username']) && !empty($_GET['username'])) {
-                    $username = $_GET['username'];
-
-                    $data = $db->prepare('SELECT username FROM users WHERE username=(:username) LIMIT 1');
-                    $data->bindParam(':username',$username,PDO::PARAM_STR);
-                    $data->execute();
-
-                    if(!$data->rowCount() == 1){
-                        $username = "This User doesn't exist";
-                    }
-                }else{
-                    $username = $_SESSION['username'];
-                    header('location:../user/?username='.$username);
-                }
-
-                echo '<h4 class="text-center content-box-header">'.$username.'</h4>
-                <div class="content-box-content text-center">
-                </div>'
-            ?>
+            <h4 class="text-center content-box-header">Settings</h4>
+            <div class="content-box-content text-center">
+                <a href="../password/change">Change Password</a>
+            </div>
         </div>
     </div>
 </div>

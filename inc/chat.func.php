@@ -65,7 +65,7 @@
 
 		if($data->rowCount()>0){
 			foreach($data->fetchAll() as $user){
-				echo '<ul><li><a>' . $user['username'] . '</a></li></ul>';
+				echo '<ul><li><a href="/user/?username='. $user['username'] .'">' . $user['username'] . '</a></li></ul>';
 			}
 		}
 	}
