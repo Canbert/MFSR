@@ -48,6 +48,8 @@ require('../../inc/connect.php');
 
                                 if($data->rowCount() == 1){
                                     $data = $db->prepare('UPDATE users SET active=1 WHERE email=(:email) AND hash=(:hash) AND active=0');
+                                    $data->bindParam(':email',$email,PDO::PARAM_STR);
+                                    $data->bindParam(':hash',$hash,PDO::PARAM_STR);
                                     $data->execute();
                                     echo "Your account has been activated";
                                 }

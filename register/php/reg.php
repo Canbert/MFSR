@@ -1,6 +1,7 @@
 <?php
 
 require('../../inc/connect.php');
+require('PHPMailerAutoload.php');
 
 if(!empty($_POST['username']) AND !empty($_POST['email'])) //check if the username and email textbox is empty
 {
@@ -43,27 +44,64 @@ if(!empty($_POST['username']) AND !empty($_POST['email'])) //check if the userna
 					if($data->execute()){
 						echo "User Created";
 
-						$to      = $email; // Send email to our user
-						$subject = 'Signup | Verification'; // Give the email a subject
-						$message = '
-						Thanks for signing up!
-						Your account has been created, you can login with the following credentials after you have activated your account by pressing the url below.
 
-						------------------------
-						Username: '.$user.'
-						------------------------
+						$mail = new PHPMailer;
 
-						Please click this link to activate your account:
-						http://mfsr.dev/verify.php?email='.$email.'&hash='.$hash.'
+//						$mail->SMTPDebug = 3;                               // Enable verbose debug output
 
-						'; // Our message above including the link
+						$mail->isSMTP();                                      // Set mailer to use SMTP
+						$mail->Host = 'smtp.gmail.com';  					// Specify main and backup SMTP servers
+						$mail->SMTPAuth = true;                               // Enable SMTP authentication
+						$mail->Username = 'mail.mfsr@gmail.com';                 // SMTP username
+						$mail->Password = 'mailmfsr';                           // SMTP password
+						$mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+						$mail->Port = 465;                                    // TCP port to connect to
 
-						$headers = 'From:noreply@mfsr.dev' . "\r\n"; // Set from headers
-						if(mail($to, $subject, $message, $headers)){ // Send our email
-							echo "Mail Sent";
+
+
+						$mail->setFrom('mail.mfsr@gmail.com','MFSR');
+						$mail->addAddress($email);
+						$mail->addReplyTo('mail.mfsr@gmail.com','Mailer');
+
+						$mail->isHTML(true);                                  // Set email format to HTML
+
+
+						$mail->Subject = 'Active your MFSR Account';
+						$mail->Body    =
+						'<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+						<html>
+						<head>
+						  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+						  <title>MFSR Account Activation</title>
+						</head>
+						<body>
+							<p><b>Thanks for signing up!</b></p>
+							<p>Your account has been created, you can login with the following credentials after you have activated your account by pressing the url below.</p>
+							<p>------------------------</p>
+							<p>Username: '.$user.'</p>
+							<p>------------------------</p>
+							<p>Please click this link to activate your account:</p>
+							<a href="http://'.$_SERVER['SERVER_NAME'].'/user/verify/?email='.$email.'&hash='.$hash.'">Activate Account</a>
+						</body>
+						</html>';
+
+//						$mail->AltBody = 'Thanks for signing up!
+//						Your account has been created, you can login with the following credentials after you have activated your account by pressing the url below.
+//
+//						------------------------
+//						Username: '.$user.'
+//						------------------------
+//
+//						Please click this link to activate your account:
+//						http://'.$_SERVER['SERVER_NAME'].'/user/verify/?email='.$email.'&hash='.$hash;
+
+
+						if($mail->send()){
+							echo "\nMail Sent";
 						}
 						else{
-							echo "Mail Not Sent";
+							echo "\nMail Not Sent";
+							echo "\nMailer Error:" . $mail->ErrorInfo;
 						}
 
 					}

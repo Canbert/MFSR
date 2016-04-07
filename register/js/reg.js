@@ -18,10 +18,11 @@ $('form').submit(function() {
 					//$('#feedback').fadeIn('slow', function() {
 					//	$('#feedback').fadeOut(6000);
 					//});
-				if(data == "User Created"){
-					$('#feedback').siblings().hide();
-					$('#feedback').html(data + ", To activate your account use the link sent to your email address");
-				}
+				$('#feedback').siblings().hide();
+				//if(data == "User Created"){
+				//	$('#feedback').siblings().hide();
+				//	$('#feedback').html(data + ", To activate your account use the link sent to your email address");
+				//}
 			}	
 		}
 	});
