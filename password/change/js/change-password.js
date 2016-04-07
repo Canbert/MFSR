@@ -14,9 +14,12 @@ $('form').submit(function() {
 		success: function(data) {
 			if (data){
 				$('#feedback').html(data);
-					$('#feedback').fadeIn('slow', function() {
-						$('#feedback').fadeOut(6000);
-					});	
+				if(data == "Password changed"){
+					$('#feedback').siblings().hide();
+				}
+					//$('#feedback').fadeIn('slow', function() {
+					//	$('#feedback').fadeOut(6000);
+					//});
 			}	
 		}
 	});

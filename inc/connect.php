@@ -9,3 +9,5 @@ define( "DB_PASSWORD", "" );
 
 
 $salt = md5("supercalifragilisticexpialidocious");
+
+$minpasslen = 4;

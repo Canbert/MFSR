@@ -1,5 +1,5 @@
 <?php
-include('../../inc/connect.php');
+include('../../../inc/connect.php');
 
 session_start();
 
@@ -14,22 +14,35 @@ if (!empty($_POST['oldPass']))
 			if($_POST['newPass'] == $_POST['reNewPass']) // check if the passwords entered are the same
 			{
 				// check if the new password length is longer than 7 and if so change the users password to the new password
-				if(strlen($_POST['newPass'])>=8) 
+				if(strlen($_POST['newPass'])>=$minpasslen)
 				{
-					$user = $_SESSION['myusername'];
-					$oldPass = md5($_POST['oldPass']);
-					$sql="SELECT * FROM users WHERE username='$user' and password='$oldPass'";
-					$result=mysql_query($sql);
-					$count = mysql_num_rows($result);
+					$user = $_SESSION['username'];
+					$oldPass = $_POST['oldPass'];
 
-					if ($count == 1)
-					{
-						mysql_query("update users set password=md5('$_POST[newPass]') where username = '$user'");
-						echo "Password changed";
+					$data = $db->prepare('SELECT username FROM users WHERE username=(:user) AND password=(:oldpass) LIMIT 1');
+					$data->bindParam(':user',$user,PDO::PARAM_STR);
+					$data->bindParam(':oldpass',hash("sha512",$oldPass . $salt),PDO::PARAM_STR);
+
+					$data->execute();
+
+					if($data->rowCount() == 1){
+
+						$newPass = $_POST['newPass'];
+
+						$data = $db->prepare('UPDATE users SET password=(:newpass) WHERE username=(:user) LIMIT 1');
+						$data->bindParam(':user',$user,PDO::PARAM_STR);
+						$data->bindParam(':newpass',hash("sha512",$newPass . $salt),PDO::PARAM_STR);
+
+						if($data->execute()){
+							echo "Password changed";
+						}
+						else{
+							echo "Something went wrong, password not changed";
+						}
+
 					}
-					else
-					{
-						echo "Please re-enter old password as it may be incorrect";
+					else{
+						echo "User doesn't exist";
 					}
 				}
 				else

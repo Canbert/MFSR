@@ -24,7 +24,7 @@ if(!empty($_POST['username']) AND !empty($_POST['email'])) //check if the userna
 		{
 			if($_POST['password'] == $_POST['repassword'])
 			{	
-				if(strlen($_POST['password'])>=4)
+				if(strlen($_POST['password'])>=$minpasslen)
 				{
 					$user = $_POST['username'];
 					$email = $_POST['email'];

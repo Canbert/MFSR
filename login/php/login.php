@@ -4,7 +4,6 @@ require('../../inc/connect.php');
 //this will check if the username and password textboxes are empty and if not will continue the code
 if(!empty($_POST['username']) AND !empty($_POST['password']))
 {
-
 	$user=$_POST['username'];
 	$pass=$_POST['password'];
 
@@ -23,7 +22,7 @@ if(!empty($_POST['username']) AND !empty($_POST['password']))
 	if($data->rowCount()==1){
 		// Register $username, and redirect to messenger
 		session_start();
-		$_SESSION["username"] = $user;
+		$_SESSION["username"] = $data->fetch()['username'];
 		$_SESSION["admin"] = $data->fetch()['admin'];
 //		header("location:../messenger");
 		echo '<script>location.href="../";</script>'; //using header doesn't work for some reason
