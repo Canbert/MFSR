@@ -40,10 +40,9 @@ require('../../inc/connect.php');
                                 $email = $_GET['email']; // Set email variable
                                 $hash = $_GET['hash']; // Set hash variable
 
-                                $data = $db->prepare('SELECT email, hash, active FROM users WHERE email=(:email) AND hash=(:hash) AND active=(:active) LIMIT 1');
+                                $data = $db->prepare('SELECT email, hash, active FROM users WHERE email=(:email) AND hash=(:hash) AND active=0 LIMIT 1');
                                 $data->bindParam(':email',$email,PDO::PARAM_STR);
-                                $data->bindParam(':hash',$email,PDO::PARAM_STR);
-                                $data->bindParam(':active',$email,PDO::PARAM_BOOL);
+                                $data->bindParam(':hash',$hash,PDO::PARAM_STR);
 
                                 $data->execute();
 
