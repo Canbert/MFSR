@@ -18,7 +18,16 @@ $('#form-mess').submit(function() {
 });
 
 //Active users
+//Call it on the page load then check every second
 $(document).ready(function() {
+
+    $.ajax({
+        url: 'php/active.php',
+        success: function(data) {
+            $('#active-users').html(data);
+        }
+    });
+
     var interval = setInterval(function() {
         $.ajax({
             url: 'php/active.php',
@@ -30,7 +39,22 @@ $(document).ready(function() {
 });
 
 //Auto get messages
+//Call it on the page load then check every second
 $(document).ready(function() {
+
+    $.ajax({
+        url: 'php/chat.php',
+        success: function(data) {
+            $('#messages-box').html(data);
+
+            if ($('#auto-scroll-check').is(':checked'))
+            {
+                var objDiv = document.getElementById("messages-box");
+                objDiv.scrollTop = objDiv.scrollHeight;
+            }
+        }
+    });
+
     var interval = setInterval(function() {
         $.ajax({
             url: 'php/chat.php',

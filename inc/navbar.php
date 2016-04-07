@@ -5,7 +5,7 @@
 <div class="top-bar" id="main-menu">
   <div class="top-bar-left">
     <ul class="dropdown menu" data-dropdown-menu>
-      <li class="menu-text">MFSR</li>
+      <li class="name"><a href="../"><b>MFSR</b></a></li>
       <li><a href="/files">Files</a></li>
     </ul>
   </div>
