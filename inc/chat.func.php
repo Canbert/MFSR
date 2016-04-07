@@ -1,6 +1,6 @@
 <?php
 
-	require('../inc/connect.php');
+	require('/connect.php');
 
 	function get_msg() {
 

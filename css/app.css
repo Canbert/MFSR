@@ -104,6 +104,7 @@ a:hover{
     float: left;
 }
 #feedback{
+    color: red;
     text-align: center;
 }
 /*
