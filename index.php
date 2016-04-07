@@ -43,16 +43,11 @@ if(!isset($_SESSION['username'])){
 
 			<form class="row content-box" id="form-mess" method="POST" action="">
 				<textarea id="user-mess"></textarea>
-<!--				<input id="user-mess" name="user-mess" type="textarea" maxlength="300" autocomplete="off">-->
 				<input id="form-mess-button" class="button" name="submit" type="submit" value="Send">
 				<label for="auto-scroll-check">
 					<input id="auto-scroll-check" type="checkbox" checked="checked" >Autoscroll messages
 				</label>
 				<div id="feedback"></div>
-
-<!--				--><?php
-//					echo displayUploadForm();
-//				?>
 			</form>
 		</div>
 		<div id="users-online" class="medium-4 columns">

@@ -46,3 +46,15 @@ $(document).ready(function() {
         });
     }, 1000);
 });
+
+$('#user-mess').on('keydown', function(event){
+    if (event.which == 13) {
+        var content = this.value;
+        if(event.ctrlKey){
+            this.value +="\n";
+            event.stopPropagation();
+        } else {
+            $('form').submit();
+        }
+    }
+});
