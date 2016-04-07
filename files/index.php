@@ -3,9 +3,6 @@
 require 'inc/core.inc.php';
 require 'php/upload.php';
 
-//REDIRECT UNTIL I MAKE THIS PAGE BETTER
-header("location:../");
-
 session_start();
 
 //redirect the user to the main page if the user is not logged in
@@ -15,41 +12,60 @@ if(!isset($_SESSION['username'])){
 ?>
 <!DOCTYPE html>
 <html>
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr" xmlns="http://www.w3.org/1999/html">
 <head>
+	<!-- Metadata about the webpage-->
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<meta name="keywords" content=""/>
+	<meta name="description" content="Messenger page for MSFR"/>
+	<meta name="author" content="Scott Thomson"/>
+
 	<!--Tab Name-->
 	<title>MFSR | Files</title>
 
-	<!-- Metadata about the webpage-->
-	<meta name="keywords" content=""/>
-	<meta name="description" content="File upload page for MSFR"/>
-	<meta name="author" content="Scott Thomson"/>
+	<link rel="stylesheet" href="../css/foundation.css">
 
 	<!-- Sitewide CSS -->
-	<link rel="stylesheet" type="text/css" href="../css/mfsr.css">
-
-	<!-- Page CSS -->
-	<link rel="stylesheet" type="text/css" href="css/files.css">
-
-	<!-- Jquery -->
-	<script src="../js/jquery-2.1.3.min.js"></script>
-
-	<!-- Javascript file that loads in the navigation bar-->
-	<script type="text/javascript" src="../js/navBar.js"></script>
+	<link rel="stylesheet" href="../css/app.css">
 
 </head>
-<body>
+<!--style="color: white;"-->
+<body >
+	<nav>
+		<?php include_once("../inc/navbar.php")?>
+	</nav>
 
-	<div class="banner"></div>
-	
-	<div id="wrapper">
-		<div id="list" class="contentBox" >
+	<div class="row" >
+		<div class="medium-12 columns">
+
+			<div id="list">
+<!--				<table class="files-table">-->
+<!--					<thead><tr><td><b>Name</b></td><td><b>Last Modified</b></td><td><b>Size</b></td></tr></thead>-->
+<!--					<tfoot><tr><td>count($files) files</td><td>Total Files Size: </td><td>@byte_convert($totalSize)</td></tr></tfoot>-->
+<!--					<tbody>-->
+<!--					</tbody>-->
+<!--				</table>-->
+			</div>
+			<div class="content-box">
+				<?php
+					echo $html;
+				?>
+			</div>
+			<?php
+				echo displayUploadForm();
+			?>
 		</div>
-		<?php
-		echo '<div class="contentBox">'.$msg.'</div>';
-		echo displayUploadForm();
-
-		?>
 	</div>
-	<script type="text/javascript" src="js/auto_list.js"></script>
+
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/what-input.js"></script>
+	<script src="../js/foundation.min.js"></script>
+	<script src="../js/app.js"></script>
+	<script src="js/auto-list.js"></script>
+<!--	<script src="js/upload.js"></script>-->
 </body>
 </html>
