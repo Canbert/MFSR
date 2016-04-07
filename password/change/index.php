@@ -60,6 +60,6 @@ if(!isset($_SESSION['username']))
 	<script src="../js/app.js"></script>
 
 	<!-- This script handles the feedback to the user. It fades the feedback text -->
-	<script type="text/javascript" src="js/changePass.js"></script>
+	<script type="text/javascript" src="js/change-password.js"></script>
 </body>
 </html>

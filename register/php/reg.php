@@ -1,7 +1,7 @@
 <?php
 
 require('../../inc/connect.php');
-require('PHPMailerAutoload.php');
+require('../../php/PHPMailerAutoload.php');
 
 if(!empty($_POST['username']) AND !empty($_POST['email'])) //check if the username and email textbox is empty
 {
@@ -57,16 +57,13 @@ if(!empty($_POST['username']) AND !empty($_POST['email'])) //check if the userna
 						$mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
 						$mail->Port = 465;                                    // TCP port to connect to
 
-
-
 						$mail->setFrom('mail.mfsr@gmail.com','MFSR');
 						$mail->addAddress($email);
 						$mail->addReplyTo('mail.mfsr@gmail.com','Mailer');
 
 						$mail->isHTML(true);                                  // Set email format to HTML
 
-
-						$mail->Subject = 'Active your MFSR Account';
+						$mail->Subject = 'Activate your MFSR Account';
 						$mail->Body    =
 						'<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 						<html>

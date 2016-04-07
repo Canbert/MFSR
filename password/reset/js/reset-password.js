@@ -11,9 +11,10 @@ $('form').submit(function() {
 		success: function(data) {
 			if (data){
 				$('#feedback').html(data);
-					$('#feedback').fadeIn('slow', function() {
-						$('#feedback').fadeOut(6000);
-					});	
+				$('#feedback').siblings().hide();
+					//$('#feedback').fadeIn('slow', function() {
+					//	$('#feedback').fadeOut(6000);
+					//});
 			}	
 		}
 	});
