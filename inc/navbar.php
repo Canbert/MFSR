@@ -14,6 +14,11 @@
       <li class="has-submenu">
         <a href="/user"><?php echo $_SESSION['username'] ?></a>
         <ul class="submenu menu vertical" data-submenu>
+          <?php
+            if($_SESSION['admin'] == 1){
+              echo '<li><a href="/admin">Administration</a></li>';
+            }
+          ?>
           <li><a href="/settings">Settings</a></li>
           <li><a href="../php/logout.php">Logout</a></li>
         </ul>

@@ -11,7 +11,7 @@ if(!empty($_POST['username']) AND !empty($_POST['password']))
 	// To protect from SQL injection
 	$user = stripslashes($user);
 
-	$data = $db->prepare('SELECT username FROM users WHERE username =(:user) and password=(:pass) LIMIT 1');
+	$data = $db->prepare('SELECT username,admin FROM users WHERE username =(:user) and password=(:pass) LIMIT 1');
 	$data->bindParam( ':user', $user, PDO::PARAM_STR );
 	$data->bindParam( ':pass', hash("sha512",$pass . $salt), PDO::PARAM_STR );
 	$data->execute();
@@ -21,6 +21,7 @@ if(!empty($_POST['username']) AND !empty($_POST['password']))
 		// Register $username, and redirect to messenger
 		session_start();
 		$_SESSION["username"] = $user;
+		$_SESSION["admin"] = $data->fetch()['admin'];
 //		header("location:../messenger");
 		echo '<script>location.href="../";</script>'; //using header doesn't work for some reason
 	}
