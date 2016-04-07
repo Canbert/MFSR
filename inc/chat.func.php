@@ -1,6 +1,6 @@
 <?php
 
-	$db =  new PDO('mysql:host=localhost;dbname=messenger',"root","");
+	require('../inc/connect.php');
 
 	function get_msg() {
 

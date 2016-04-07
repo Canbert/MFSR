@@ -1,5 +1,4 @@
 <?php
-	require('../inc/connect.php');
 	require('../inc/chat.func.php');
 
 	session_start();
