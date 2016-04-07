@@ -14,7 +14,4 @@ A instant messenger and file sharing system. Originally designed for HND Computi
 - [ ] Asynchronous requests
 - [ ] Hyperlinks in messages
 - [ ] Images(links/post them) in messages
-
-
-
-
+- [ ] Message Notifications
