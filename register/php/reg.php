@@ -29,6 +29,9 @@ if(!empty($_POST['username']) AND !empty($_POST['email'])) //check if the userna
 					$email = $_POST['email'];
 					$pass = $_POST['password'];
 
+					$user = stripslashes($user);
+					$user = htmlspecialchars($user);
+
 					$data = $db->prepare('INSERT INTO users(username,password,email) VALUES (:username,:password,:email)');
 					$data->bindParam( ':username', $user, PDO::PARAM_STR );
 					$data->bindParam( ':password', hash("sha512",$pass . $salt), PDO::PARAM_STR );
