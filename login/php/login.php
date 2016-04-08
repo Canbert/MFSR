@@ -11,7 +11,7 @@ if(!empty($_POST['username']) AND !empty($_POST['password']))
 	$user = stripslashes($user);
 	$user = htmlspecialchars($user);
 
-	$data = $db->prepare('SELECT username,admin FROM users WHERE username =(:user) and password=(:pass) LIMIT 1');
+	$data = $db->prepare('SELECT username,admin FROM users WHERE username =(:user) and password=(:pass) AND active=1 LIMIT 1');
 	$data->bindParam( ':user', $user, PDO::PARAM_STR );
 	$data->bindParam( ':pass', hash("sha512",$pass . $salt), PDO::PARAM_STR );
 	$data->execute();
