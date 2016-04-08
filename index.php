@@ -41,14 +41,14 @@ if(!isset($_SESSION['username'])){
 
 			<div class="row content-box" id="messages-box"></div>
 
-			<form class="row content-box" id="form-mess" method="POST" action="">
+			<div class="row content-box" id="form-mess" method="POST" action="">
 				<textarea id="user-mess" required ></textarea>
 				<input id="form-mess-button" class="button" name="submit" type="submit" value="Send">
 				<label for="auto-scroll-check">
 					<input id="auto-scroll-check" type="checkbox" checked="checked" >Autoscroll messages
 				</label>
 				<div id="feedback"></div>
-			</form>
+			</div>
 		</div>
 		<div id="users-online" class="medium-4 columns">
 			<h4 class="text-center">Users Online</h4>
@@ -60,6 +60,7 @@ if(!isset($_SESSION['username'])){
 	<script src="js/what-input.js"></script>
 	<script src="js/foundation.min.js"></script>
 	<script src="js/app.js"></script>
-	<script src="js/messenger.js"></script>
+<!--	<script src="js/messenger.js"></script>-->
+	<script src="js/mess.js"></script>
 </body>
 </html>
