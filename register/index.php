@@ -17,6 +17,8 @@
 
 	<!-- Sitewide CSS -->
 	<link rel="stylesheet" href="../../css/app.css">
+
+	<script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body>
 	<div class="row">
@@ -41,6 +43,7 @@
 							<input id="repassword" type="password" name="repassword" placeholder="Confirm Password">
 						</label>
 						<div id="feedback"></div>
+						<div class="g-recaptcha" data-sitekey="6LfW3xwTAAAAAKZLH1dcg-5IQiEhrBFDwvaJwN2L"></div>
 						<input class="button expanded" name="submit" type="submit" value="Submit">
 					</div>
 				</div>
