@@ -55,17 +55,19 @@ while (true) {
             $user_message = $tst_msg->message; //message text
             $timestamp = date('Y-m-d G:i:s');
 
-            //prepare data to be sent to client
-            $response_text = mask(json_encode(array('type'=>'usermsg', 'name'=>$user_name, 'message'=>$user_message,'timestamp'=>$timestamp)));
-            send_message($response_text); //send data
+            if($user_message != null) {
+                //prepare data to be sent to client
+                $response_text = mask(json_encode(array('type' => 'usermsg', 'name' => $user_name, 'message' => $user_message, 'timestamp' => $timestamp)));
+                send_message($response_text); //send data
 
-            $data = $db->prepare('INSERT INTO messages(message,timestamp,user_id) VALUES ((:msg),(:timestamp),(SELECT user_id FROM users WHERE username=(:sender)))');
-            $data->bindParam(':sender',$_SESSION['username'],PDO::PARAM_STR);
-            $data->bindParam(':msg',$user_message,PDO::PARAM_STR);
-            $data->bindParam(':timestamp',$timestamp,PDO::PARAM_STR);
-            $data->execute();
+                $data = $db->prepare('INSERT INTO messages(message,timestamp,user_id) VALUES ((:msg),(:timestamp),(SELECT user_id FROM users WHERE username=(:sender)))');//
+                $data->bindParam(':sender', $user_name, PDO::PARAM_STR);
+                $data->bindParam(':msg', $user_message, PDO::PARAM_STR);
+                $data->bindParam(':timestamp', $timestamp, PDO::PARAM_STR);
+                $data->execute();
 
-            break 2; //exist this loop
+                break 2; //exist this loop
+            }
         }
 
         $buf = @socket_read($changed_socket, 1024, PHP_NORMAL_READ);

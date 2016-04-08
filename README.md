@@ -10,8 +10,8 @@ A instant messenger and file sharing system. Originally designed for HND Computi
 - [x] Implement Foundation Framework
 - [x] Account verification via email
 - [x] Password reset via email
+- [x] Asynchronous requests
 - [ ] Emojis - This is partially done any unicode will change to an image but you can't put ":)" an it will convert
-- [ ] Asynchronous requests
 - [ ] Hyperlinks in messages
 - [ ] Images(links/post them) in messages
 - [ ] Message Notifications

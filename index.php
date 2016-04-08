@@ -44,9 +44,6 @@ if(!isset($_SESSION['username'])){
 			<div class="row content-box" id="form-mess" method="POST" action="">
 				<textarea id="user-mess" required ></textarea>
 				<input id="form-mess-button" class="button" name="submit" type="submit" value="Send">
-				<label for="auto-scroll-check">
-					<input id="auto-scroll-check" type="checkbox" checked="checked" >Autoscroll messages
-				</label>
 				<div id="feedback"></div>
 			</div>
 		</div>
