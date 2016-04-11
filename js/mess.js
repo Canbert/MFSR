@@ -1,113 +1,119 @@
-$(document).ready(function(){
+var Server;
 
+function log( text ) {
+    $log = $('#messages-box');
+    //Add text to log
+    $log.append(($log.val()?"\n":'')+text);
+    //Autoscroll
+    $log[0].scrollTop = $log[0].scrollHeight - $log[0].clientHeight;
+}
 
-    // Let's check if the browser supports notifications
-    if (!("Notification" in window)) {
-        //alert("This browser does not support desktop notification");
-        alert("PETER PLZ!!!");
-    }
+function send(username) {
+    var message = $('#user-mess').val(); //get message text
 
-    Notification.requestPermission();
+    var msg = {
+        message:message,
+        username:username
+    };
 
-    var myusername = "";
+    $('#user-mess').val(""); //reset text
 
+    Server.send( 'message', JSON.stringify(msg) );
+}
+
+//loads all the messages from the database
+function loadMessages(){
     $.ajax({
         url: 'php/get.php',
         success: function(data) {
-            $('#messages-box').append(data);
-            $('#messages-box').scrollTop(document.getElementById("messages-box").scrollHeight);
+            var messages = JSON.parse(data);
+            for(var i = 0;i<messages.length;i++){
+                log(messageFormat(messages[i].username,messages[i].message,messages[i].timestamp));
+            }
         }
     });
+}
+
+//formats the messages to have the right css
+function messageFormat(username,message,timestamp){
+
+    return '<div class="message"><strong><a href="/user/?username=' + username + '">' + username + '</a>:</strong><br/>'
+        + message
+        + '<p class="message-timestamp">' + new Date(timestamp.replace("-", " ", "g")) +'</p></div>';
+
+}
+
+$(document).ready(function() {
+    log('Connecting...');
+    Server = new FancyWebSocket('ws://127.0.0.1:9300');
+
+    loadMessages();
+
+    var username = ""; //user's session name
 
     $.ajax({
         url: 'php/sessuser.php',
         success: function(data) {
-            myusername = data;
+            username = data;
         }
     });
 
     $('#user-mess').on('keydown', function(event){
         if (event.which == 13) {
-            var content = this.value;
             if(event.ctrlKey || event.shiftKey || event.altKey){
                 this.value +="\n";
                 event.stopPropagation();
             } else {
-                $('#form-mess-button').click();
+                send(username);
                 event.preventDefault();
             }
         }
     });
 
-    //$('#auto-scroll-check:checked').click(function () {
-    //    var objDiv = document.getElementById("messages-box");
-    //    objDiv.scrollTop = objDiv.scrollHeight;
-    //});
-
-    //create a new WebSocket object.
-    var wsUri = "ws://2.27.93.102:9000/inc/server.php";
-    websocket = new WebSocket(wsUri);
-
-    websocket.onopen = function(ev) { // connection is open
-        //$('#users-online').append("<div class=\"system_msg\">Connected!</div>"); //notify user
-        //$('#users-online').append('<ul><li><a href="/user/?username='+ myusername + '">' + myusername + '</a></li></ul>')
-    }
-
     $('#form-mess-button').on('click',function(){ //use clicks message send button
-        var mymessage = $('#user-mess').val(); //get message text
-
-        //prepare json data
-        var msg = {
-            message: mymessage,
-            name: myusername
-        };
-        //convert and send data to server
-        websocket.send(JSON.stringify(msg));
-
-        $('#user-mess').val(""); //reset text
+        send(username);
     });
 
-    //#### Message received from server?
-    websocket.onmessage = function(ev) {
-        var msg = JSON.parse(ev.data); //PHP sends Json data
-        var type = msg.type; //message type
-        var umsg = msg.message; //message text
-        var uname = msg.name; //user name
-        var utimestamp = msg.timestamp; //user name
+    //Let the user know we're connected
+    Server.bind('open', function() {
+        log( "Connected." );
+    });
 
-        if(type == 'usermsg')
-        {
-            $('#messages-box').append('<div class="message"><strong><a href="/user/?' + uname + '">' + uname + '</a>:</strong><br />' + umsg + '<p class="message-timestamp">'+utimestamp+'</p></div>');
-        }
-        if(type == 'system')
-        {
-            $('#messages-box').append("<div class=\"system_msg\">"+umsg+"</div>");
-        }
+    //OH NOES! Disconnection occurred.
+    Server.bind('close', function( data ) {
+        log( "Disconnected." );
+    });
+
+    //Log any messages sent from server
+    Server.bind('message', function( payload ) {
+        var msg = JSON.parse(payload); //PHP sends Json data
+        var user = msg.user; //user name
+        var message = msg.message; //message text
+        var timestamp = msg.timestamp; //timestamp
+        log(messageFormat(user,message,timestamp) );
 
         // Let's check whether notification permissions have already been granted
-        if (Notification.permission === "granted" && myusername != uname && !window.isFocus) {
+        if (Notification.permission === "granted" && user != username && !window.isFocus) {
             // If it's okay let's create a notification
             var options = {
-                body: umsg
+                body: message
             }
-            var notification = new Notification(uname + " said",options);
+            var notification = new Notification(user ,options);
         }
 
         // Otherwise, we need to ask the user for permission
         else if (Notification.permission !== 'denied') {
             Notification.requestPermission(function (permission) {
                 // If the user accepts, let's create a notification
-                if (permission === "granted" && myusername != uname  && !window.isFocus) {
+                if (permission === "granted" && user != username && !window.isFocus) {
                     var options = {
-                        body: umsg
+                        body: message
                     }
-                    var notification = new Notification(uname + " said",options);
+                    var notification = new Notification(user ,options);
                 }
             });
         }
-        $('#messages-box').scrollTop(document.getElementById("messages-box").scrollHeight);
-    };
+    });
 
-    websocket.onerror	= function(ev){$('#messages-box').append("<div class=\"system_error\">Error Occurred - "+ev.data+"</div>");};
-    websocket.onclose 	= function(ev){$('#message-box').append("<div class=\"system_msg\">Connection Closed</div>");};
+    Server.connect();
 });

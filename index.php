@@ -1,6 +1,4 @@
 <?php
-require 'inc/core.inc.php';
-
 session_start();
 
 if(!isset($_SESSION['username'])){
@@ -58,6 +56,7 @@ if(!isset($_SESSION['username'])){
 	<script src="js/foundation.min.js"></script>
 	<script src="js/app.js"></script>
 <!--	<script src="js/messenger.js"></script>-->
+	<script src="js/fancywebsocket.js"></script>
 	<script src="js/mess.js"></script>
 </body>
 </html>
