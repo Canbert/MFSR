@@ -12,8 +12,8 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
 	$ip = long2ip( $Server->wsClients[$clientID][6] );
 
 	$msg = json_decode($message);
-	$message = $msg->message;
-	$user = $msg->username;
+	$message = htmlentities($msg->message);
+	$user = htmlentities($msg->username);
 
 	// check if message length is 0
 	if ($messageLength == 0) {

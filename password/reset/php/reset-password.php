@@ -1,6 +1,6 @@
 <?php
 include('../../../inc/connect.php');
-require('../../../php/PHPMailerAutoload.php');
+require('../../../inc/phpmailer/PHPMailerAutoload.php');
 
 if (isset($_POST['username']) && !empty($_POST['username']))
 {

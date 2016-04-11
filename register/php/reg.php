@@ -1,7 +1,7 @@
 <?php
 
 require('../../inc/connect.php');
-require('../../php/PHPMailerAutoload.php');
+require('../../inc/phpmailer/PHPMailerAutoload.php');
 
 if(!empty($_POST['username']) AND !empty($_POST['email'])) //check if the username and email textbox is empty
 {

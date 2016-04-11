@@ -1,3 +1,3 @@
 Mobile scaling - landscape
-Message button on mobile
-messenger not working on mobile
+Message button on mobile - scaling 
+doesn't send message on mobile

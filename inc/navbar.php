@@ -20,7 +20,7 @@
             }
           ?>
           <li><a href="/settings">Settings</a></li>
-          <li><a href="../php/logout.php">Logout</a></li>
+          <li><a href="logout.php">Logout</a></li>
         </ul>
       </li>
     </ul>
