@@ -40,8 +40,8 @@ if(!isset($_SESSION['username'])){
 			<div class="row content-box" id="messages-box"></div>
 
 			<div class="row content-box" id="form-mess" method="POST" action="">
-				<textarea id="user-mess" required ></textarea>
-				<input id="form-mess-button" class="button" name="submit" type="submit" value="Send">
+				<textarea class="small-10 columns" id="user-mess" required ></textarea>
+				<input class="small-2 columns button" id="form-mess-button" name="submit" type="submit" value="Send">
 				<div id="feedback"></div>
 			</div>
 		</div>

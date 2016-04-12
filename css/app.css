@@ -90,18 +90,17 @@ a:hover{
 .message:nth-child(even){
     /*background-color: ;*/
 }
+.message a{
+    color: #0c4d78;
+}
 #form-mess{
     color: black;
 }
 #user-mess{
-    width: 89%;
-    margin-left: 1%;
-    float: left;
+    resize: vertical;
 }
 #form-mess-button{
-    width: 9%;
-    margin-right: 1%;
-    float: left;
+
 }
 #auto-scroll-check{
     float: left;

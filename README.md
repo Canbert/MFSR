@@ -4,6 +4,7 @@ A instant messenger and file sharing system. Originally designed for HND Computi
 # Libraries
 - [PHP-Emoji](https://github.com/iamcal/php-emoji)
 - [PHPMailer](https://github.com/PHPMailer/PHPMailer)
+- [HTMLPurifier](http://htmlpurifier.org/)
 
 ### V2.0 TODO List
 
@@ -11,7 +12,7 @@ A instant messenger and file sharing system. Originally designed for HND Computi
 - [x] Account verification via email
 - [x] Password reset via email
 - [x] Asynchronous requests
-- [ ] Emojis - This is partially done any unicode will change to an image but you can't put ":)" an it will convert
-- [ ] Hyperlinks in messages
-- [ ] Images(links/post them) in messages
-- [ ] Message Notifications
+- [X] Message Notifications
+- [X] Hyperlinks in messages
+- [X] Images(links/post them) in messages (These can be linked too, posting is possible if linked to file uploads link)
+- [ ] Emojis

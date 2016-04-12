@@ -1,6 +1,5 @@
 <?php
 require '../inc/connect.php';
-require('emoji.php');
 
 function get_msg() {
 

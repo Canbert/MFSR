@@ -3,17 +3,26 @@
 set_time_limit(0);
 
 // include the web sockets server script (the server is started at the far bottom of this file)
-require 'class.PHPWebSocket.php';
-require 'connect.php';
+require('./inc/class.PHPWebSocket.php');
+require ('./inc/connect.php');
+require_once('./inc/library/HTMLPurifier.auto.php');
 
 // when a client sends data to the server
 function wsOnMessage($clientID, $message, $messageLength, $binary) {
 	global $Server,$db;
 	$ip = long2ip( $Server->wsClients[$clientID][6] );
 
+	$config = HTMLPurifier_Config::createDefault();
+	$def = $config->getHTMLDefinition(true);
+//	$config->set('HTML.TidyLevel', 'heavy');
+//	$def->addAttribute('a', 'target', new HTMLPurifier_AttrDef_Enum(
+//			array('_blank','_self','_target','_top')
+//	));
+	$purifier = new HTMLPurifier($config);
+
 	$msg = json_decode($message);
-	$message = htmlentities($msg->message);
-	$user = htmlentities($msg->username);
+	$message = $purifier->purify(nl2br($msg->message));
+	$user = $purifier->purify($msg->username);
 
 	// check if message length is 0
 	if ($messageLength == 0) {
@@ -21,12 +30,13 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
 		return;
 	}
 
+	$timestamp = date('Y-m-d G:i:s');
+
 	//The speaker is the only person in the room. Don't let them feel lonely.
 	if ( sizeof($Server->wsClients) == 1 ) {
-		$Server->wsSend($clientID, "There isn't anyone else in the room, but I'll still listen to you. --Your Trusty Server");
+		$Server->wsSend($clientID,json_encode(array('user' => "SERVER", 'message' => "There isn't anyone else in the ,room, but I'll still listen to you. --Your Trusty Server", 'timestamp' => $timestamp)) );
 	}
 	else {
-		$timestamp = date('Y-m-d G:i:s');
 		//Send the message to everyone
 		foreach ($Server->wsClients as $id => $client) {
 			$Server->wsSend($id, json_encode(array('user' => $user, 'message' => $message, 'timestamp' => $timestamp)));
@@ -48,10 +58,12 @@ function wsOnOpen($clientID)
 
 	$Server->log( "$ip ($clientID) has connected." );
 
+	$timestamp = date('Y-m-d G:i:s');
+
 	//Send a join notice to everyone but the person who joined
-	foreach ( $Server->wsClients as $id => $client )
-		if ( $id != $clientID )
-			$Server->wsSend($id, "Visitor $clientID ($ip) has joined the room.");
+//	foreach ( $Server->wsClients as $id => $client )
+//		if ( $id != $clientID )
+//			$Server->wsSend($id,json_encode(array('user' => "SERVER", 'message' => "Visitor $clientID ($ip) has joined the room.", 'timestamp' => $timestamp)));
 }
 
 // when a client closes or lost connection
@@ -61,9 +73,11 @@ function wsOnClose($clientID, $status) {
 
 	$Server->log( "$ip ($clientID) has disconnected." );
 
+	$timestamp = date('Y-m-d G:i:s');
+
 	//Send a user left notice to everyone in the room
-	foreach ( $Server->wsClients as $id => $client )
-		$Server->wsSend($id, "Visitor $clientID ($ip) has left the room.");
+//	foreach ( $Server->wsClients as $id => $client )
+//		$Server->wsSend($id, json_encode(array('user' => "SERVER", 'message' => "Visitor $clientID ($ip) has left the room.", 'timestamp' => $timestamp)));
 }
 
 // start the server

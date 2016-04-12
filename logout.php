@@ -1,5 +1,5 @@
 <?php
-require 'connect.php';
+require 'inc/connect.php';
 
 session_start();
 
