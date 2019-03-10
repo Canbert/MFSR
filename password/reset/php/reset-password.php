@@ -21,11 +21,12 @@ if (isset($_POST['username']) && !empty($_POST['username']))
 		{
 
 			$pass = md5(rand(0,1000));
+			$pass = hash("sha512",$pass . $salt);
 
 			$data = $db->prepare('UPDATE users SET password=(:pass) WHERE username=(:user) AND email=(:email)');
 			$data->bindParam(':user',$user,PDO::PARAM_STR);
 			$data->bindParam(':email',$email,PDO::PARAM_STR);
-			$data->bindParam(':pass',hash("sha512",$pass . $salt),PDO::PARAM_STR);
+			$data->bindParam(':pass',$pass,PDO::PARAM_STR);
 
 			$mail = new PHPMailer;
 

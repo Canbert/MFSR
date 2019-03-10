@@ -18,20 +18,22 @@ if (!empty($_POST['oldPass']))
 				{
 					$user = $_SESSION['username'];
 					$oldPass = $_POST['oldPass'];
+					$oldPass = hash("sha512",$oldPass . $salt);
 
 					$data = $db->prepare('SELECT username FROM users WHERE username=(:user) AND password=(:oldpass) LIMIT 1');
 					$data->bindParam(':user',$user,PDO::PARAM_STR);
-					$data->bindParam(':oldpass',hash("sha512",$oldPass . $salt),PDO::PARAM_STR);
+					$data->bindParam(':oldpass',$oldPass,PDO::PARAM_STR);
 
 					$data->execute();
 
 					if($data->rowCount() == 1){
 
 						$newPass = $_POST['newPass'];
+						$newPass = hash("sha512",$newPass . $salt);
 
 						$data = $db->prepare('UPDATE users SET password=(:newpass) WHERE username=(:user) LIMIT 1');
 						$data->bindParam(':user',$user,PDO::PARAM_STR);
-						$data->bindParam(':newpass',hash("sha512",$newPass . $salt),PDO::PARAM_STR);
+						$data->bindParam(':newpass',$newPass,PDO::PARAM_STR);
 
 						if($data->execute()){
 							echo "Password changed";
