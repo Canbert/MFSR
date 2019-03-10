@@ -35,9 +35,11 @@ if(!empty($_POST['username']) AND !empty($_POST['email'])) //check if the userna
 
 					$hash = md5(rand(0,1000));
 
+					$pass = hash("sha512",$pass . $salt);
+
 					$data = $db->prepare('INSERT INTO users(username,password,email,hash) VALUES (:username,:password,:email,:hash)');
 					$data->bindParam( ':username', $user, PDO::PARAM_STR );
-					$data->bindParam( ':password', hash("sha512",$pass . $salt), PDO::PARAM_STR );
+					$data->bindParam( ':password', $pass, PDO::PARAM_STR );
 					$data->bindParam( ':email', $email, PDO::PARAM_STR );
 					$data->bindParam( ':hash', $hash, PDO::PARAM_STR );
 

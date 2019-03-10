@@ -10,10 +10,11 @@ if(!empty($_POST['username']) AND !empty($_POST['password']))
 	// To protect from SQL injection
 	$user = stripslashes($user);
 	$user = htmlspecialchars($user);
+	$pass = hash("sha512",$pass . $salt);
 
 	$data = $db->prepare('SELECT username,admin FROM users WHERE username =(:user) and password=(:pass) AND active=1 LIMIT 1');
 	$data->bindParam( ':user', $user, PDO::PARAM_STR );
-	$data->bindParam( ':pass', hash("sha512",$pass . $salt), PDO::PARAM_STR );
+	$data->bindParam( ':pass', $pass, PDO::PARAM_STR );
 	$data->execute();
 
 	// If result matched $user and $pass, table row must be 1 row
