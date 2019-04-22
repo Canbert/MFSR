@@ -1,0 +1,5 @@
+#Ignore /uploads/ files
+/uploads/*
+
+#Don't ignore uploads htaccess
+!/uploads/.htaccess
