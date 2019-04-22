@@ -12,7 +12,7 @@ if(isset($_FILES[ 'uploaded' ]['type'] )){
 	$uploaded_tmp  = $_FILES[ 'uploaded' ][ 'tmp_name' ];
 
 	// Where are we going to be writing to?
-	$target_path   = '/uploads/';
+	$target_path   = '..\uploads\\';
 	//$target_file   = basename( $uploaded_name, '.' . $uploaded_ext ) . '-';
 	$target_file   =  md5( uniqid() . $uploaded_name ) . '.' . $uploaded_ext;
 	$temp_file     = ( ( ini_get( 'upload_tmp_dir' ) == '' ) ? ( sys_get_temp_dir() ) : ( ini_get( 'upload_tmp_dir' ) ) );
@@ -36,7 +36,7 @@ if(isset($_FILES[ 'uploaded' ]['type'] )){
 		imagedestroy( $img );
 
 		// Can we move the file to the web root from the temp folder?
-		if( rename( $temp_file, ( getcwd() . $target_path . $target_file ) ) ) {
+		if( rename( $temp_file, $target_path .  $target_file  ) ) {
 			// Yes!
 			$html .=  "<a href='${target_path}${target_file}'>${target_file}</a> successfully uploaded!";
 		}
