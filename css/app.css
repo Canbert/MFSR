@@ -9,6 +9,9 @@ body{
     margin: 0;
     font-family: verdana;
 }
+div{
+    color: black;
+}
 a{
     text-decoration: none;
     color: white;
